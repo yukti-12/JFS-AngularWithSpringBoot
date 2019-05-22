@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "dream",
       "schematics": {},
       "architect": {
         "build": {
@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/dream-app",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "main": "src/dream.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [

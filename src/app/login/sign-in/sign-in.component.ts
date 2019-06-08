@@ -57,10 +57,11 @@ export class SignInComponent implements OnInit {
     this._authService
       .validateByEmail(useremail, userpassword)
       .subscribe(response => {
-        this.user = response[0]; // extracting the user object from the response
+        console.log("**********" + response.name);
+        this.user = response; // extracting the user object from the response
         if (this.user != undefined) {
           //admin role -- super user
-          if (this.user.role == "super") {
+          if (this.user.rollname == "super") {
             this.guestStatus = false;
             this.router.navigate(["list-user"]);
           } else {

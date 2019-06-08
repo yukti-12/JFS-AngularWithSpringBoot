@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../user.service";
 import { User } from "../user";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -9,21 +10,46 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ["./edit-user.component.css"]
 })
 export class EditUserComponent implements OnInit {
-  user: User;
+  userDetail: User;
+  userForm: FormGroup;
+  submitted: boolean = false;
 
-  constructor(private _serv: UserService, private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: UserService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
-    // to extract the route parameter,
-    // snapshot = static current information about the activated route
-    // paramMap = key / value pair of all the route parameters
     let userid = this.route.snapshot.paramMap.get("userid");
+    this.service.getUserById(userid).subscribe(response => {
+      console.log(response);
+      this.userDetail = response;
+      // to set all the from values in formGroup
+      this.userForm.setValue(this.userDetail);
+    });
 
-    // fetch the user from server by ID
-    this._serv.getUserById(userid).subscribe(response => {
-      this.user = response;
+    this.userForm = this.fb.group({
+      id: [""],
+      name: ["", Validators.required],
+      rollname: ["", Validators.required],
+      username: ["", Validators.required],
+      password: ["", Validators.required],
+      email: ["", Validators.required],
+      phone: ["", Validators.required],
+      city: ["", Validators.required],
+      zipcode: ["", Validators.required]
+    });
+  }
 
-      console.log(this.user);
+  onSubmit() {
+    this.submitted = true;
+    if (this.userForm.invalid) {
+      return;
+    }
+    this.service.updateUser(this.userForm.value).subscribe(data => {
+      this.router.navigate(["list-user"]);
     });
   }
 }

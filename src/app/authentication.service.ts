@@ -9,14 +9,14 @@ import { User } from "./user";
 
 // inject the Http instance-service inside Authentication Service
 export class AuthenticationService {
+  private baseUrl = "http://localhost:8080/api/validate";
+
   constructor(private _http: HttpClient) {}
 
   validateByEmail(email, password): Observable<User> {
     // API call via json-server (db.json)
     // mock server API call
     //console.log("Inside Auth service" + email + "---" + password);
-    return this._http.get<User>(
-      "http://localhost:3000/users?email=" + email + "&password=" + password
-    );
+    return this._http.get<User>(`${this.baseUrl}/${email}/${password}`);
   }
 }

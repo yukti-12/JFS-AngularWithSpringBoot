@@ -7,29 +7,30 @@ import { User } from "./user";
   providedIn: "root"
 })
 export class UserService {
-  users: User[];
+  private baseUrl = "http://localhost:8080/api/users";
 
   constructor(private _http: HttpClient) {}
 
   getAllUsers(): Observable<User[]> {
     // hit the mock json-server and fetch values from there
-    return this._http.get<User[]>("http://localhost:3000/users");
+    console.log("In method---");
+    return this._http.get<User[]>(`${this.baseUrl}`);
   }
 
   // fetch the corresponding user by Id
   getUserById(userid): Observable<User> {
-    return this._http.get<User>("http://localhost:3000/users/" + userid);
+    return this._http.get<User>(`${this.baseUrl}/${userid}`);
   }
 
   adUser(newUser: User): Observable<User> {
-    return this._http.post<User>("http://localhost:3000/users", newUser);
+    return this._http.post<User>(`${this.baseUrl}` + `/create`, newUser);
   }
 
   deleteUser(id): Observable<{}> {
-    return this._http.delete("http://localhost:3000/users/" + id);
+    return this._http.delete(`${this.baseUrl}/${id}`, { responseType: "text" });
   }
 
-  updateUser(user: User) {
-    this._http.put("http://localhost:3000/users/" + user.id, user);
+  updateUser(user: User): Observable<User> {
+    return this._http.put<User>(`${this.baseUrl}/${user.id}`, user);
   }
 }

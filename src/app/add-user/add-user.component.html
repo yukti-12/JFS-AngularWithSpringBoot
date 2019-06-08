@@ -11,13 +11,13 @@
 
     <div class="form-group">
       <label>Role:</label>
-      <select formControlName="role" class="form-control">
+      <select formControlName="rollname" class="form-control">
         <option value="--">--Select Role--</option>
         <option value="super">Super</option>
         <option value="guest">Guest</option>
       </select><br/>
-      <div *ngIf="submitted && userForm.controls.role.errors" class="text-danger">
-        <div *ngIf="userForm.controls.role.errors.required">Role is required</div>
+      <div *ngIf="submitted && userForm.controls.rollname.errors" class="text-danger">
+        <div *ngIf="userForm.controls.rollname.errors.required">Role is required</div>
       </div>
     </div>
 
@@ -53,27 +53,27 @@
       </div>
     </div>
 
-    <!-- Nested Group -->
-    <div formGroupName="address">
-      <div class="form-group">
-        <label>City</label>
-        <input type="text" class="form-control" formControlName="city" />
-        <div *ngIf="submitted && userForm.controls.address.controls.city.errors" class="text-danger">
-          <div *ngIf="userForm.controls.address.controls.city.errors.required">City is required</div>
-        </div>
-        <br/>
 
+
+    <div class="form-group">
+      <label>City</label>
+      <input type="text" class="form-control" formControlName="city" />
+      <div *ngIf="submitted && userForm.controls.city.errors" class="text-danger">
+        <div *ngIf="userForm.controls.city.errors.required">City is required</div>
+      </div>
+      <br/>
+
+    </div>
+
+
+    <div class="form-group">
+      <label>zipcode</label>
+      <input type="text" class="form-control" formControlName="zipcode" />
+      <div *ngIf="submitted && userForm.controls.zipcode.errors" class="text-danger">
+        <div *ngIf="userForm.controls.zipcode.errors.required">Zipcode is required</div>
       </div>
     </div>
-    <div formGroupName="address">
-      <div class="form-group">
-        <label>zipcode</label>
-        <input type="text" class="form-control" formControlName="zipcode" />
-        <div *ngIf="submitted && userForm.controls.address.controls.zipcode.errors" class="text-danger">
-          <div *ngIf="userForm.controls.address.controls.zipcode.errors.required">Zipcode is required</div>
-        </div>
-      </div>
-    </div>
+
     <button class="btn btn-primary" type="submit">Add</button>
   </form>
 </div>

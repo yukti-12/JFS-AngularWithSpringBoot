@@ -13,9 +13,9 @@
       <tbody>
         <tr *ngFor="let user of users;let i=index">
           <td>{{user.name | uppercase}}</td>
-          <td>{{user.role}}</td>
+          <td>{{user.rollname}}</td>
           <td>{{user.email}}</td>
-          <td>{{user.address.city}}</td>
+          <td>{{user.city}}</td>
           <td><button class="btn btn-info btn-sm m-2" (click)="editUser(user)">Edit</button>
             <button class="btn btn-danger btn-sm m-2" (click)="deleteUser(user)" style="margin-left:20px;">Delete</button>
           </td>
